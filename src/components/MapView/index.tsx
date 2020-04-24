@@ -5,7 +5,7 @@ import { createStyles, WithStyles, withStyles } from '@material-ui/core';
 
 import Layers from './Layers';
 import DateSelector from './DateSelector';
-import { layersSelector } from '../../context/mapStateSlice';
+import { dateRangeSelector, layersSelector } from '../../context/mapStateSlice';
 import { availableDatesSelector } from '../../context/serverStateSlice';
 
 import appConfig from '../../config/prism.json';
@@ -17,9 +17,11 @@ const Map = ReactMapboxGl({
 function MapView({ classes }: MapViewProps) {
   const layers = useSelector(layersSelector);
   const serverAvailableDates = useSelector(availableDatesSelector);
-  const selectedLayersDates = serverAvailableDates.filter((dates, layerId) =>
-    layers.has(layerId),
+  const selectedLayersDates = serverAvailableDates.filter((_, layerId) =>
+    layers.map(l => l.serverLayer).includes(layerId),
   );
+
+  const { startDate } = useSelector(dateRangeSelector);
 
   const {
     map: { latitude, longitude, zoom },
@@ -37,7 +39,7 @@ function MapView({ classes }: MapViewProps) {
           width: '100vw',
         }}
       >
-        <Layers layers={layers} />
+        <Layers layers={layers} selectedDate={startDate} />
       </Map>
       <DateSelector availableDates={selectedLayersDates} />
     </div>
