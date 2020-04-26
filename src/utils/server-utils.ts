@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { xml2js } from 'xml-js';
 import { Map } from 'immutable';
 import { merge, unset, get, isString, union, isEmpty } from 'lodash';
@@ -6,6 +6,9 @@ import { format, parse } from 'url';
 
 import config from '../config/prism.json';
 import { AvailableDates } from '../config/types';
+
+// Set default timezone to UTC
+moment.tz.setDefault('Etc/UTC');
 
 const xml2jsOptions = {
   compact: true,

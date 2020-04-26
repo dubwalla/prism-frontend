@@ -1,5 +1,8 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { AvailableDates } from '../../../config/types';
+
+// Set default timezone to UTC
+moment.tz.setDefault('Etc/UTC');
 
 export const months = [
   'Jan',

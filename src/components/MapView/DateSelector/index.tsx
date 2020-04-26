@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment, forwardRef, Ref } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { flatten } from 'lodash';
 import { Map } from 'immutable';
 import {
@@ -26,6 +26,9 @@ import {
 } from '../../../context/mapStateSlice';
 import { months, getMonthStartAndEnd, isAvailableMonth } from './utils';
 import { AvailableDates } from '../../../config/types';
+
+// Set default timezone to UTC
+moment.tz.setDefault('Etc/UTC');
 
 interface InputProps {
   value?: string;
