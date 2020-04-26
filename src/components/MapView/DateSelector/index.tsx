@@ -85,7 +85,7 @@ function DateSelector({ availableDates = Map(), classes }: DateSelectorProps) {
             className={classes.datePickerInput}
             selected={selectedDate.toDate()}
             onChange={updateStartDate}
-            maxDate={new Date()}
+            maxDate={new Date(Date.now())}
             todayButton="Today"
             peekNextMonth
             showMonthDropdown
